@@ -1,0 +1,19 @@
+# setuptools 负责把检查核心和 MCP 入口打包成可安装的 wheel 文件。
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ti-composition-gate"
+version = "0.1.0"
+description = "Titanium composition validation MCP tool"
+requires-python = ">=3.10"
+dependencies = ["mcp==1.30.0"]
+
+# UVX 安装本包后，通过这个命令启动 MCP 服务。
+[project.scripts]
+ti-composition-gate = "mcp_stdio_entry:serve"
+
+# 只打包业务核心和 MCP 入口，测试、工作记录和本地环境均在包外。
+[tool.setuptools]
+py-modules = ["agentarts_gate_check", "mcp_stdio_entry"]
